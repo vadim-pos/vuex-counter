@@ -11,6 +11,12 @@
         
         <!-- using actions with parameters -->
         <button class="btn btn-primary" @click="incrementBy(10)">Increment By 10</button>
+        <hr>
+
+        <!-- Using two-way binding -->
+        <label>Set Counter value:</label>
+        <input v-model="counter">
+
     </div>
 </template>
 
@@ -48,7 +54,18 @@
             ...mapActions(['asyncIncrement', 'asyncDecrement', 'incrementBy'])
         },
 
-    /* --- Using actions for async manipulating with store --- */
+    /* --- Using Two-Way-Binding v-model --- */
+
+        computed: {
+            counter: {
+                get() {
+                    return this.$store.getters.counter;
+                },
+                set(value) {
+                    this.$store.dispatch('setCounter', value);
+                }
+            }
+        }
         
     }
 </script>

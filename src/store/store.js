@@ -9,17 +9,26 @@ export const store = new Vuex.Store({
     },
 
     getters: {
+        counter(state) {
+            return state.counter;
+        },
         doubleCounter(state) {
             return state.counter * 2;
         }
     },
 
     mutations: {
-        increment(state, payload = 1) {
-            state.counter += payload;
+        increment(state) {
+            state.counter++;
         },
         decrement(state) {
             state.counter--;
+        },
+        incrementBy(state, payload) {
+            state.counter += payload;
+        },
+        setCounter(state, payload) {
+            state.counter = payload;
         }
     },
 
@@ -35,7 +44,10 @@ export const store = new Vuex.Store({
             }, 1000);
         },
         incrementBy(context, payload) {
-            context.commit('increment', payload);
+            context.commit('incrementBy', payload);
+        },
+        setCounter({ commit }, payload) {
+            commit('setCounter', payload);
         }
     }
 });
